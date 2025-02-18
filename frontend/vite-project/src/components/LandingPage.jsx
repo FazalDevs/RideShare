@@ -1,55 +1,64 @@
-import React from 'react';
-import NavbarLogout from './NavbarLogout';
-import Navbar from './Navbar';
+import React from "react";
+import Navbar from "./Navbar";
 
 export default function RideShareLandingPage() {
     return (
-        <div>
+        <div className="bg-gradient-to-b from-[#004AAD] to-[#002F6C] min-h-screen flex flex-col">
             <Navbar />
-            <div className="min-h-screen bg-gradient-to-b from-blue-50 to-blue-100 flex flex-col">
-                <main className="flex-grow flex flex-col items-center justify-center text-center px-4">
-                    <div className="max-w-3xl mb-12">
-                        <h1 className="text-5xl font-bold text-blue-800 mb-6">
-                            Your Journey, Made Easier
-                        </h1>
-                        <p className="text-lg text-blue-600">
-                            Connecting riders and drivers for a seamless and eco-friendly commuting experience.
-                        </p>
-                    </div>
 
-                    <div className="flex flex-col sm:flex-row gap-8 w-full max-w-4xl">
-                        <div className="bg-white shadow-lg rounded-lg p-6 flex-1">
-                            <h2 className="text-2xl font-semibold text-blue-700 mb-4">
-                                Affordable and Convenient
-                            </h2>
-                            <p className="text-blue-600 mb-6">
-                                Share rides, save money, and reduce traffic on the road.
-                            </p>
-                            <a href="/carpoolForm" className="bg-blue-500 hover:bg-blue-600 text-white px-6 py-3 rounded-lg w-full block text-center">
-                                Start Your Ride
-                            </a>
-                        </div>
-
-                        <div className="bg-white shadow-lg rounded-lg p-6 flex-1">
-                            <h2 className="text-2xl font-semibold text-blue-700 mb-4">
-                                Eco-Friendly Solution
-                            </h2>
-                            <p className="text-blue-600 mb-6">
-                                Lower your carbon footprint by carpooling with others.
-                            </p>
-                            <a href="/listing" className="bg-blue-500 hover:bg-blue-600 text-white px-6 py-3 rounded-lg w-full block text-center">
-                                Find a Ride
-                            </a>
-                        </div>
-                    </div>
-                </main>
-
-                <footer className="bg-blue-200 py-6 text-center">
-                    <p className="text-blue-700 text-sm">
-                        &copy; 2025 RideShare. All rights reserved.
+            {/* Hero Section */}
+            <main className="flex-grow flex flex-col items-center justify-center text-center px-6 py-12 text-white">
+                <div className="max-w-3xl mb-12">
+                    <h1 className="text-4xl sm:text-5xl font-extrabold tracking-tight mb-4">
+                        Seamless Rides, Smarter Commutes
+                    </h1>
+                    <p className="text-lg text-gray-200">
+                        Join a community of smart commuters—save money, reduce congestion, and travel responsibly.
                     </p>
-                </footer>
-            </div>
+                </div>
+
+                {/* Cards Section */}
+                <div className="flex flex-col sm:flex-row gap-8 w-full max-w-4xl">
+                    {/* Card 1 */}
+                    <div className="bg-white/80 backdrop-blur-lg shadow-xl rounded-2xl p-8 flex-1 text-gray-800 transition-transform transform hover:scale-105">
+                        <h2 className="text-2xl font-semibold text-[#004AAD] mb-4">
+                            Affordable & Convenient
+                        </h2>
+                        <p className="text-gray-600 mb-6">
+                            Share rides, cut costs, and make traveling easy.
+                        </p>
+                        <a
+                            href="/carpoolForm"
+                            className="bg-[#004AAD] hover:bg-[#002F6C] text-white px-6 py-3 rounded-lg w-full block text-center font-semibold transition-colors"
+                        >
+                            Start Your Ride
+                        </a>
+                    </div>
+
+                    {/* Card 2 */}
+                    <div className="bg-white/80 backdrop-blur-lg shadow-xl rounded-2xl p-8 flex-1 text-gray-800 transition-transform transform hover:scale-105">
+                        <h2 className="text-2xl font-semibold text-[#004AAD] mb-4">
+                            Eco-Friendly Solution
+                        </h2>
+                        <p className="text-gray-600 mb-6">
+                            Reduce your carbon footprint by sharing rides.
+                        </p>
+                        <a
+                            href="/listing"
+                            className="bg-[#004AAD] hover:bg-[#002F6C] text-white px-6 py-3 rounded-lg w-full block text-center font-semibold transition-colors"
+                        >
+                            Find a Ride
+                        </a>
+                    </div>
+                </div>
+            </main>
+
+            {/* Footer */}
+            <footer className="bg-[#002F6C] py-6 text-center">
+                <p className="text-gray-300 text-sm">
+                    &copy; 2025 RideShare. All rights reserved.
+                </p>
+            </footer>
         </div>
     );
 }

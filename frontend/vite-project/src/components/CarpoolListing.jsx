@@ -4,6 +4,7 @@ import axios from "axios";
 import { MapContainer, TileLayer, Marker, Popup, Polyline } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import NavbarLogout from "./NavbarLogout";
+import toast from 'react-hot-toast';
 
 // Custom marker icons
 const defaultIcon = L.icon({
@@ -147,6 +148,20 @@ const CarpoolListings = () => {
         setSuggestions([]);
     };
 
+    const handleSendRequest = async (carpoolId) => {
+        try {
+            const response = await axios.post(
+                `http://localhost:4005/request/${carpoolId}/`,
+                {},
+                { withCredentials: true }
+            );
+            toast.success('Request sent successfully');
+        } catch (error) {
+            console.error("Error sending request:", error);
+            toast.error(error.response.data.message || error || 'Failed to send request');
+        }
+    };
+
     if (isLoading) {
         return <div className="flex items-center justify-center h-screen text-gray-500">Loading...</div>;
     }
@@ -154,8 +169,8 @@ const CarpoolListings = () => {
     return (
         <div>
             <NavbarLogout />
-            <div className="flex h-screen">
-                <div className="w-1/3 p-4 overflow-y-auto border-r bg-grey">
+            <div className="flex flex-col md:flex-row h-screen">
+                <div className="w-full md:w-1/3 p-4 overflow-y-auto border-r bg-grey">
                     <h2 className="text-2xl font-bold mb-4 text-gray-700">Carpool Listings</h2>
                     <div className="mb-4 relative">
                         <label htmlFor="area" className="block text-sm font-medium text-gray-700 mb-2">
@@ -218,11 +233,20 @@ const CarpoolListings = () => {
                                 <div className="mt-3 text-blue-500 font-medium text-sm">
                                     Click to view route to PDEU
                                 </div>
+
+                                <button
+                                    onClick={(e) => {
+                                        e.stopPropagation(); // Prevent triggering listing click event
+                                        handleSendRequest(listing._id);
+                                    }}
+                                    className="mt-3 w-full bg-blue-500 text-white py-2 px-4 rounded-lg shadow-md hover:bg-blue-600 transition"
+                                >
+                                    Send Request
+                                </button>
                             </div>
                         ))}
-
                 </div>
-                <div className="w-2/3">
+                <div className="w-full md:w-2/3 h-96 md:h-auto">
                     <MapContainer
                         center={[23.0225, 72.5714]}
                         zoom={12}

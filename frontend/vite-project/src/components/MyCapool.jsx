@@ -6,6 +6,7 @@ const MyCarpool = () => {
     const [carpools, setCarpools] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState("");
+    const [requests, setRequests] = useState({});
 
     const fetchCarpools = async () => {
         try {
@@ -15,13 +16,25 @@ const MyCarpool = () => {
                     "Content-Type": "application/json",
                 },
             });
-            console.log(response);
-            setCarpools(response.data.listings); // Assuming API returns an array of carpool objects
+            setCarpools(response.data.listings);
             setLoading(false);
         } catch (err) {
-            console.error("Error fetching carpools:", err);
             setError("Failed to load carpools. Please try again later.");
             setLoading(false);
+        }
+    };
+
+    const fetchRequests = async (carpoolId) => {
+        try {
+            const response = await axios.get(`http://localhost:4005/request/${carpoolId}`, {
+                withCredentials: true,
+            });
+            setRequests((prev) => ({
+                ...prev,
+                [carpoolId]: response.data,
+            }));
+        } catch (err) {
+            console.error("Error fetching requests:", err);
         }
     };
 
@@ -30,10 +43,8 @@ const MyCarpool = () => {
             await axios.delete(`http://localhost:4005/listing/delete/${id}`, {
                 withCredentials: true,
             });
-            // Update the state to remove the deleted carpool
             setCarpools((prevCarpools) => prevCarpools.filter((carpool) => carpool._id !== id));
         } catch (err) {
-            console.error("Error deleting carpool:", err);
             setError("Failed to delete the carpool. Please try again later.");
         }
     };
@@ -41,22 +52,6 @@ const MyCarpool = () => {
     useEffect(() => {
         fetchCarpools();
     }, []);
-
-    if (loading) {
-        return (
-            <div className="flex justify-center items-center h-screen">
-                <p className="text-gray-600 text-lg font-medium">Loading your carpools...</p>
-            </div>
-        );
-    }
-
-    if (error) {
-        return (
-            <div className="flex justify-center items-center h-screen">
-                <p className="text-red-500 text-lg font-medium">{error}</p>
-            </div>
-        );
-    }
 
     return (
         <div>
@@ -95,7 +90,34 @@ const MyCarpool = () => {
                                             {carpool.homeCoordinates.longitude})
                                         </p>
                                     </div>
-                                    {/* Delete button */}
+                                    {/* Fetch Requests Button */}
+                                    <button
+                                        onClick={() => fetchRequests(carpool._id)}
+                                        className="mt-4 px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition"
+                                    >
+                                        View Requests
+                                    </button>
+
+                                    {/* Display Requests */}
+                                    {requests[carpool._id] && (
+                                        <div className="mt-4 p-3 border rounded-lg bg-gray-100">
+                                            <h3 className="font-semibold text-lg">Requests:</h3>
+                                            {requests[carpool._id].length === 0 ? (
+                                                <p className="text-gray-500">No requests yet.</p>
+                                            ) : (
+                                                <ul>
+                                                    {requests[carpool._id].map((req) => (
+                                                        <li key={req.user._id} className="p-2 border-b">
+                                                            <p><strong>Name:</strong> {req.user.name}</p>
+                                                            <p><strong>Email:</strong> {req.user.email}</p>
+                                                        </li>
+                                                    ))}
+                                                </ul>
+                                            )}
+                                        </div>
+                                    )}
+
+                                    {/* Delete Carpool Button */}
                                     <button
                                         onClick={() => deleteCarpool(carpool._id)}
                                         className="mt-4 px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition"

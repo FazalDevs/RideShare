@@ -1,8 +1,12 @@
-import React from 'react';
-import axios from 'axios'
+import React, { useState } from 'react';
+import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import toast from 'react-hot-toast';
+
 export default function NavbarLogout() {
-    const navigate = useNavigate()
+    const navigate = useNavigate();
+    const [isOpen, setIsOpen] = useState(false);
+
     const handleLogout = async () => {
         // Add your logout logic here (e.g., clearing tokens, redirecting, etc.)
         const response = await axios.get('http://localhost:4005/user/logout', {
@@ -10,10 +14,10 @@ export default function NavbarLogout() {
             headers: {
                 'Content-Type': 'application/json',
             },
-        })
-        localStorage.removeItem('jwt')
-        console.log('Logout button clicked');
-        navigate('/')
+        });
+        localStorage.removeItem('jwt');
+        toast.success('Logged out successfully');
+        navigate('/');
     };
 
     return (
@@ -22,11 +26,13 @@ export default function NavbarLogout() {
                 <div className="flex justify-between h-16 items-center">
                     {/* Logo */}
                     <div className="flex items-center">
-                        <h1 className="text-2xl font-extrabold text-blue-800">RideShare</h1>
+                        <a href="/" className="text-2xl font-extrabold text-blue-800">
+                            RideShare
+                        </a>
                     </div>
 
-                    {/* Navigation Links */}
-                    <div className="flex space-x-6">
+                    {/* Desktop Navigation */}
+                    <div className="hidden md:flex space-x-6">
                         <a
                             href="/listing"
                             className="text-blue-800 hover:text-blue-600 px-4 py-2 rounded-md text-base font-medium"
@@ -52,8 +58,78 @@ export default function NavbarLogout() {
                             Logout
                         </button>
                     </div>
+
+                    {/* Mobile Menu Button */}
+                    <div className="md:hidden flex items-center">
+                        <button
+                            onClick={() => setIsOpen(!isOpen)}
+                            className="text-blue-800 hover:text-blue-600 focus:outline-none"
+                        >
+                            {isOpen ? (
+                                <svg
+                                    className="h-6 w-6"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    stroke="currentColor"
+                                >
+                                    <path
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        strokeWidth="2"
+                                        d="M6 18L18 6M6 6l12 12"
+                                    />
+                                </svg>
+                            ) : (
+                                <svg
+                                    className="h-6 w-6"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    stroke="currentColor"
+                                >
+                                    <path
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        strokeWidth="2"
+                                        d="M4 6h16M4 12h16m-7 6h7"
+                                    />
+                                </svg>
+                            )}
+                        </button>
+                    </div>
                 </div>
             </div>
+
+            {/* Mobile Navigation */}
+            {isOpen && (
+                <div className="md:hidden bg-white shadow-lg">
+                    <a
+                        href="/listing"
+                        className="block px-4 py-2 text-blue-800 hover:bg-gray-100"
+                    >
+                        Join a Carpool
+                    </a>
+                    <a
+                        href="/carpoolForm"
+                        className="block px-4 py-2 text-blue-800 hover:bg-gray-100"
+                    >
+                        Create a Carpool
+                    </a>
+                    <a
+                        href="/listing/mycarpool"
+                        className="block px-4 py-2 text-blue-800 hover:bg-gray-100"
+                    >
+                        My Carpool
+                    </a>
+                    <button
+                        onClick={handleLogout}
+                        className="block w-full px-4 py-2 bg-red-500 text-white text-center hover:bg-red-600"
+                    >
+                        Logout
+                    </button>
+                </div>
+            )}
         </nav>
     );
 }

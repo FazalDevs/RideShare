@@ -12,7 +12,11 @@ const carpoolSchema = new mongoose.Schema({
     },
     timings: { type: String, required: true },
     createdAt: { type: Date, default: Date.now },
-    user: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
+    user: { type: mongoose.Schema.Types.ObjectId, ref: "User2", required: true },
+    requests: [{
+        user: { type: mongoose.Schema.Types.ObjectId, ref: 'User2' },
+        status: { type: String, enum: ['pending', 'accepted', 'rejected'], default: 'pending' },
+    }]
 });
 const CarpoolListing = mongoose.model("CarpoolListing", carpoolSchema);
 export default CarpoolListing;

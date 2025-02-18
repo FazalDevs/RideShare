@@ -5,6 +5,7 @@ import mongoose from 'mongoose';
 import listingRoutes from './routes/listing.route.js';
 import userRoutes from './routes/user.route.js';
 import cookieParser from 'cookie-parser'
+import requestRoutes from './routes/request.route.js';
 dotenv.config();
 const app = express();
 app.use(cors(
@@ -18,6 +19,7 @@ app.use(cookieParser());
 app.use(express.json());
 app.use('/listing', listingRoutes);
 app.use('/user', userRoutes);
+app.use('/request', requestRoutes);
 
 const uri = process.env.MONGO_URI;
 try {

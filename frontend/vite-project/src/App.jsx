@@ -12,12 +12,13 @@ import NavbarLogout from './components/NavbarLogout';
 import { useState, useEffect } from 'react';
 import PrivateRoute from './components/PrivateRoute';
 import MyCarpool from './components/MyCapool';
-
+import { Toaster } from 'react-hot-toast'
 function App() {
   const token = localStorage.getItem("jwt")
   return (
     <div>
       <div className=''>
+        <Toaster />
         <Routes>
           <Route path="/carpoolform" element={<PrivateRoute><CarpoolForm /></PrivateRoute>} />
           <Route path="/listing" element={<PrivateRoute><CarpoolListing /></PrivateRoute>} />
