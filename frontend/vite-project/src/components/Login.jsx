@@ -13,7 +13,7 @@ export default function LoginPage() {
         e.preventDefault();
         try {
             const response = await axios.post(
-                'http://localhost:4005/user/login',
+                'https://rideshare-backend-eg6m.onrender.com/user/login',
                 { email, password },
                 { withCredentials: true, headers: { 'Content-Type': 'application/json' } }
             );

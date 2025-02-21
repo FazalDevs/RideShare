@@ -9,7 +9,7 @@ export default function NavbarLogout() {
 
     const handleLogout = async () => {
         // Add your logout logic here (e.g., clearing tokens, redirecting, etc.)
-        const response = await axios.get('http://localhost:4005/user/logout', {
+        const response = await axios.get('https://rideshare-backend-eg6m.onrender.com/user/logout', {
             withCredentials: true,
             headers: {
                 'Content-Type': 'application/json',

@@ -48,7 +48,7 @@ const CarpoolListings = () => {
     useEffect(() => {
         const fetchListings = async () => {
             try {
-                const response = await axios.get("http://localhost:4005/listing/fetch", {
+                const response = await axios.get("https://rideshare-backend-eg6m.onrender.com/listing/fetch", {
                     withCredentials: true,
                     headers: {
                         "Content-Type": "application/json",
@@ -151,7 +151,7 @@ const CarpoolListings = () => {
     const handleSendRequest = async (carpoolId) => {
         try {
             const response = await axios.post(
-                `http://localhost:4005/request/${carpoolId}/`,
+                `https://rideshare-backend-eg6m.onrender.com/request/${carpoolId}/`,
                 {},
                 { withCredentials: true }
             );
