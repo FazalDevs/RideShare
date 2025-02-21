@@ -68,7 +68,7 @@ const CarpoolListings = () => {
     const fetchRoute = async (start, end) => {
         try {
             const response = await axios.get(
-                `http://router.project-osrm.org/route/v1/driving/${start.longitude},${start.latitude};${end.longitude},${end.latitude}?overview=full&geometries=geojson`
+                `https://router.project-osrm.org/route/v1/driving/${start.longitude},${start.latitude};${end.longitude},${end.latitude}?overview=full&geometries=geojson`
             );
 
             const coordinates = response.data.routes[0].geometry.coordinates;

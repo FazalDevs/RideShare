@@ -57,7 +57,7 @@ const AddressForm = () => {
     const fetchRoute = async (lat, lon) => {
         try {
             const response = await axios.get(
-                `http://router.project-osrm.org/route/v1/driving/${lon},${lat};${PDEU_COORDINATES[1]},${PDEU_COORDINATES[0]}?overview=full&geometries=geojson`
+                `https://router.project-osrm.org/route/v1/driving/${lon},${lat};${PDEU_COORDINATES[1]},${PDEU_COORDINATES[0]}?overview=full&geometries=geojson`
             );
 
             const coordinates = response.data.routes[0].geometry.coordinates.map((coord) => [
