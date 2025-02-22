@@ -71,11 +71,13 @@ const AddressForm = () => {
             alert("Failed to fetch route. Please try again.");
         }
     };
-    const customIcon = new L.Icon({
-        iconUrl: "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png",
+    const customIcon = L.icon({
+        iconUrl: "https://unpkg.com/leaflet@1.7.1/dist/images/marker-icon.png",
+        shadowUrl: "https://unpkg.com/leaflet@1.7.1/dist/images/marker-shadow.png",
         iconSize: [25, 41],
         iconAnchor: [12, 41],
-        popupAnchor: [1, -34]
+        popupAnchor: [1, -34],
+        shadowSize: [41, 41]
     });
 
 
