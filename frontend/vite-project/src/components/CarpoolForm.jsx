@@ -1,10 +1,10 @@
+import L from "leaflet";
 import React, { useState, useRef } from "react";
 import axios from "axios";
 import { MapContainer, TileLayer, Marker, Polyline } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import { useNavigate } from "react-router-dom";
 import NavbarLogout from "./NavbarLogout";
-import L from "leaflet";
 
 const AddressForm = () => {
     const navigate = useNavigate()
@@ -240,7 +240,7 @@ const AddressForm = () => {
                             <Marker position={[selectedAddress.lat, selectedAddress.lon]} icon={customIcon} />
                         )}
                         <Marker position={PDEU_COORDINATES} icon={customIcon} />
-                        <Marker position={PDEU_COORDINATES} />
+                        {/* <Marker position={PDEU_COORDINATES} /> */}
                         {routeCoordinates.length > 0 && (
                             <Polyline positions={routeCoordinates} color="blue" />
                         )}
