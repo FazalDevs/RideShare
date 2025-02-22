@@ -70,14 +70,13 @@ const AddressForm = () => {
             alert("Failed to fetch route. Please try again.");
         }
     };
-    const customIcon = new L.Icon({
-        iconUrl: "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png",
-        iconRetinaUrl: "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon-2x.png",
-        shadowUrl: "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png",
-        iconSize: [25, 41],
-        iconAnchor: [12, 41],
-        popupAnchor: [1, -34],
+    const customIcon = new L.DivIcon({
+        className: 'custom-marker',
+        html: '<div style="width: 20px; height: 20px; background: red; border-radius: 50%; border: 2px solid white;"></div>',
+        iconSize: [20, 20],
+        iconAnchor: [10, 10]
     });
+
 
 
     const handleSubmit = async (e) => {
