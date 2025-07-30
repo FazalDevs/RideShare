@@ -92,6 +92,14 @@ export default function LoginPage() {
                             Sign up
                         </a>
                     </p>
+                    {/* Recruiter Credentials */}
+                    <div className="mt-6 p-4 bg-blue-50 border border-blue-200 rounded-lg text-center">
+                        <p className="text-sm text-gray-700 font-medium">
+                            <span className="block text-gray-800 mb-1">🔑 Test Login Credentials:</span>
+                            <span className="block">Email: <strong>admin@admin.com</strong></span>
+                            <span className="block">Password: <strong>123456</strong></span>
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>
