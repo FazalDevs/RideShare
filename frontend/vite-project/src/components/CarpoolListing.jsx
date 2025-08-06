@@ -155,7 +155,7 @@ const CarpoolListings = () => {
             });
 
             // ✅ Update the listings to show only rides near this location
-            if (response.data.carpools.length === 0) {
+            if (response.data.listings.length === 0) {
                 toast("No rides found near this area");
             }
 

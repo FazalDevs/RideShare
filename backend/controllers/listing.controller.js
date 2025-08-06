@@ -73,12 +73,10 @@ export const getNearbyCarpools = async (req, res) => {
     try {
         const { longitude, latitude, maxDistance = 5000 } = req.query;
 
-        //Validate coordinates
         if (!longitude || !latitude) {
             return res.status(400).json({ message: "Longitude and latitude are required" });
         }
 
-        //Perform geospatial query
         const carpools = await CarpoolListing.find({
             homeLocation: {
                 $near: {
@@ -86,14 +84,14 @@ export const getNearbyCarpools = async (req, res) => {
                         type: "Point",
                         coordinates: [parseFloat(longitude), parseFloat(latitude)]
                     },
-                    $maxDistance: parseInt(maxDistance) // in meters
+                    $maxDistance: parseInt(maxDistance)
                 }
             }
         });
 
         return res.status(200).json({
             success: true,
-            message: "Nearby listings found",
+            count: carpools.length,
             listings: carpools
         });
     } catch (error) {
