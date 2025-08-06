@@ -101,9 +101,10 @@ const CarpoolListings = () => {
         async (query) => {
             if (query.length > 3) {
                 try {
-                    const response = await axios.get(
-                        `https://nominatim.openstreetmap.org/search?format=json&q=${query}`,
-                    );
+                    const response = await axios.get(`https://rideshare-backend-eg6m.onrender.com/listing/search-address`, {
+                        params: { q: query },
+                        withCredentials: true
+                    });
 
                     if (response.data.length > 0) {
                         setSuggestions(response.data.slice(0, 5)); // Limit to 5 suggestions

@@ -53,11 +53,21 @@ export const getListing = async (req, res) => {
 }
 export const searchAddress = async (req, res) => {
     const { q } = req.query;
+
     try {
-        const response = await axios.get(`https://nominatim.openstreetmap.org/search?format=json&q=${q}`);
-        res.json(response.data);
+        const response = await axios.get(`https://nominatim.openstreetmap.org/search`, {
+            params: { format: 'json', q },
+            headers: {
+                // ✅ Nominatim requires a valid User-Agent or it may block requests
+                'User-Agent': 'RideshareApp/1.0 (your_email@example.com)',
+                'Accept-Language': 'en'
+            }
+        });
+
+        return res.status(200).json(response.data);
     } catch (error) {
-        res.status(500).json({ error: 'Failed to fetch data' });
+        console.error("Nominatim API error:", error.message);
+        return res.status(500).json({ error: 'Failed to fetch address suggestions' });
     }
 };
 export const searchMyCarpool = async (req, res) => {
