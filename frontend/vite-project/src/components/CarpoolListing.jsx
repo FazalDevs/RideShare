@@ -139,13 +139,31 @@ const CarpoolListings = () => {
         debouncedFetchSuggestions(query);
     };
 
-    const handleSuggestionClick = (suggestion) => {
+    const handleSuggestionClick = async (suggestion) => {
+        const latitude = parseFloat(suggestion.lat);
+        const longitude = parseFloat(suggestion.lon);
+
         setSelectedArea(suggestion.display_name);
-        setSelectedAreaCoordinates({
-            latitude: parseFloat(suggestion.lat),
-            longitude: parseFloat(suggestion.lon),
-        });
+        setSelectedAreaCoordinates({ latitude, longitude });
         setSuggestions([]);
+
+        try {
+            // ✅ Fetch nearby rides within 5 km radius based on clicked suggestion
+            const response = await axios.get(`https://rideshare-backend-eg6m.onrender.com/listing/nearby`, {
+                params: { latitude, longitude, maxDistance: 5000 },
+                withCredentials: true
+            });
+
+            // ✅ Update the listings to show only rides near this location
+            if (response.data.carpools.length === 0) {
+                toast("No rides found near this area");
+            }
+
+            setListings(response.data.listings || []);
+        } catch (error) {
+            console.error("Error fetching nearby carpools:", error);
+            toast.error("Failed to fetch rides for this area");
+        }
     };
 
     const handleSendRequest = async (carpoolId) => {

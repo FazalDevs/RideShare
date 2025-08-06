@@ -1,4 +1,5 @@
 import express from 'express'
+import axios from 'axios';
 import CarpoolListing from '../models/listing.models.js'
 export const createListing = async (req, res) => {
     const { ownerName, branch, year, homeAddress, homeCoordinates, timings } = req.body;
@@ -9,6 +10,10 @@ export const createListing = async (req, res) => {
         year,
         homeAddress,
         homeCoordinates,
+        homeLocation: {
+            type: "Point",
+            coordinates: [homeCoordinates.longitude, homeCoordinates.latitude] // [lng, lat]
+        },
         timings,
         user: req.user.id
     });
@@ -64,4 +69,35 @@ export const searchMyCarpool = async (req, res) => {
         return res.status(500).json({ message: error.message });
     }
 }
+export const getNearbyCarpools = async (req, res) => {
+    try {
+        const { longitude, latitude, maxDistance = 5000 } = req.query;
+
+        //Validate coordinates
+        if (!longitude || !latitude) {
+            return res.status(400).json({ message: "Longitude and latitude are required" });
+        }
+
+        //Perform geospatial query
+        const carpools = await CarpoolListing.find({
+            homeLocation: {
+                $near: {
+                    $geometry: {
+                        type: "Point",
+                        coordinates: [parseFloat(longitude), parseFloat(latitude)]
+                    },
+                    $maxDistance: parseInt(maxDistance) // in meters
+                }
+            }
+        });
+
+        return res.status(200).json({
+            success: true,
+            message: "Nearby listings found",
+            listings: carpools
+        });
+    } catch (error) {
+        return res.status(500).json({ message: error.message });
+    }
+};
 export default {};

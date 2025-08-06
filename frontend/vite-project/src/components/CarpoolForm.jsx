@@ -99,6 +99,13 @@ const AddressForm = () => {
                 latitude: selectedAddress.lat,
                 longitude: selectedAddress.lon,
             },
+            homeLocation: {
+                type: "Point",
+                coordinates: [
+                    parseFloat(selectedAddress.lon), // longitude first
+                    parseFloat(selectedAddress.lat), // latitude second
+                ],
+            },
         };
 
         try {

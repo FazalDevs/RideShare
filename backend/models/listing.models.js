@@ -10,6 +10,16 @@ const carpoolSchema = new mongoose.Schema({
         latitude: { type: Number, required: true },
         longitude: { type: Number, required: true },
     },
+    homeLocation: {
+        type: {
+            type: String,
+            enum: ['Point'],
+            default: 'Point'
+        },
+        coordinates: {
+            type: [Number] // [longitude, latitude]
+        }
+    },
     timings: { type: String, required: true },
     createdAt: { type: Date, default: Date.now },
     user: { type: mongoose.Schema.Types.ObjectId, ref: "User2", required: true },
@@ -18,5 +28,6 @@ const carpoolSchema = new mongoose.Schema({
         status: { type: String, enum: ['pending', 'accepted', 'rejected'], default: 'pending' },
     }]
 });
+carpoolSchema.index({ homeLocation: '2dsphere' });
 const CarpoolListing = mongoose.model("CarpoolListing", carpoolSchema);
 export default CarpoolListing;
