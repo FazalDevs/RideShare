@@ -103,7 +103,6 @@ const CarpoolListings = () => {
                 try {
                     const response = await axios.get(
                         `https://nominatim.openstreetmap.org/search?format=json&q=${query}`,
-                        { headers: { 'User-Agent': 'rideshare-app/1.0 (your-email@example.com)' } }
                     );
 
                     if (response.data.length > 0) {
