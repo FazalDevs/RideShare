@@ -10,6 +10,6 @@ router.post('/update/:id', authenticate, updateListing);
 router.delete('/delete/:id', authenticate, deleteListing);
 router.get('/mycarpool', authenticate, searchMyCarpool);
 router.get('/nearby', authenticate, getNearbyCarpools);
-
+router.get('/search-address', authenticate, searchAddress);
 
 export default router;
