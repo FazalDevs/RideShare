@@ -56,9 +56,12 @@ export const searchAddress = async (req, res) => {
 
     try {
         const response = await axios.get(`https://nominatim.openstreetmap.org/search`, {
-            params: { format: 'json', q },
+            params: {
+                format: 'json', q,
+                extratags: 0,
+                limit: 5
+            },
             headers: {
-                // ✅ Nominatim requires a valid User-Agent or it may block requests
                 'User-Agent': 'RideshareApp/1.0 (your_email@example.com)',
                 'Accept-Language': 'en'
             }
