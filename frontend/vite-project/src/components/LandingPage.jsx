@@ -1,6 +1,5 @@
 import React from "react";
 import Navbar from "./Navbar";
-import { FaCarSide, FaLeaf } from "react-icons/fa";
 
 export default function RideShareLandingPage() {
     return (
@@ -29,7 +28,9 @@ export default function RideShareLandingPage() {
                 <div className="flex flex-col sm:flex-row gap-8 w-full max-w-4xl z-10 animate-fadeIn delay-200">
                     {/* Card 1 */}
                     <div className="bg-white/20 backdrop-blur-xl shadow-xl rounded-2xl p-8 flex-1 text-white border border-white/30 transform transition duration-300 hover:scale-105 hover:shadow-2xl">
-                        <FaCarSide className="text-4xl mb-4 text-yellow-300" />
+                        <div className="w-12 h-12 bg-yellow-300 rounded-full flex items-center justify-center text-gray-900 font-bold text-xl mb-4">
+                            🚗
+                        </div>
                         <h2 className="text-2xl font-semibold mb-4">
                             Affordable & Convenient
                         </h2>
@@ -46,7 +47,9 @@ export default function RideShareLandingPage() {
 
                     {/* Card 2 */}
                     <div className="bg-white/20 backdrop-blur-xl shadow-xl rounded-2xl p-8 flex-1 text-white border border-white/30 transform transition duration-300 hover:scale-105 hover:shadow-2xl">
-                        <FaLeaf className="text-4xl mb-4 text-green-300" />
+                        <div className="w-12 h-12 bg-green-300 rounded-full flex items-center justify-center text-gray-900 font-bold text-xl mb-4">
+                            🌱
+                        </div>
                         <h2 className="text-2xl font-semibold mb-4">
                             Eco-Friendly Solution
                         </h2>
