@@ -5,7 +5,7 @@ export const generateToken = async (id, res) => {
     res.cookie("jwt", token, {
         httpOnly: false,
         secure: true,
-        sameSite: "Lax",
+        sameSite: "None",
         path: '/',
     });
     // console.log(token)
