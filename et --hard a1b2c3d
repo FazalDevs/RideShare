@@ -1,0 +1,43 @@
+[33m273c569[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m)[m added vercel.json
+[33m40c3611[m added vercel.json
+[33m2359dd2[m deploying on vercel
+[33m27a764a[m cookie changes
+[33m43eea7c[m cookie changes
+[33m039c2a2[m solving cookie issue
+[33m5d403a8[m solving cookie issue
+[33m870bc71[m error with cookies
+[33m809f8bf[m landing page improvements
+[33mb92b045[m landing page improvements
+[33me7affd4[m improving landing page
+[33m744fe9d[m loading changes
+[33m27bdaea[m minimizing API payload size
+[33ma3118d2[m search address route in backend
+[33m24943d7[m changes in nominatim requests
+[33mf9c319a[m nominatim changes
+[33m768203d[m adding user agent for nominatim requests
+[33m8ce3e72[m indexing for finding neaby rides
+[33m0a2367e[m indexing for nearby search
+[33m2685c5d[m readme
+[33m5492e26[m bypass login with demo credentials
+[33mf34cbe9[m ping changes to keep backend alive
+[33mc8091e8[m marker changes
+[33m85fa72b[m final changes
+[33mf35a267[m final changes
+[33me7fe005[m final changes
+[33m9db8b63[m final changes
+[33mbad56fd[m final changes
+[33m455cc63[m final changes
+[33m413eb35[m final changes
+[33m4a5cbba[m final changes
+[33m12e884c[m final changes
+[33m4c296f2[m final changes
+[33mf1d3fa9[m final changes
+[33mc415d70[m changed logo and cookie settings
+[33m4935083[m changed logo and cookie settings
+[33m0864b55[m changes for deployment
+[33mf0a61c3[m changes for deployment
+[33m7d92d00[m changes for deployment
+[33m58cb9c3[m Merge branch 'main' of https://github.com/FazalDevs/RideShare
+[33m5a06844[m added a request to join functionality
+[33m1ae69ba[m Basic Functionalities added
+[33mdf553ba[m Initial commit

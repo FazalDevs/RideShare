@@ -10,7 +10,7 @@ const MyCarpool = () => {
 
     const fetchCarpools = async () => {
         try {
-            const response = await axios.get("https://rideshare-backend-eg6m.onrender.com/listing/mycarpool", {
+            const response = await axios.get("/api/listing/mycarpool", {
                 withCredentials: true,
                 headers: {
                     "Content-Type": "application/json",
@@ -26,7 +26,7 @@ const MyCarpool = () => {
 
     const fetchRequests = async (carpoolId) => {
         try {
-            const response = await axios.get(`https://rideshare-backend-eg6m.onrender.com/request/${carpoolId}`, {
+            const response = await axios.get(`/api/request/${carpoolId}`, {
                 withCredentials: true,
             });
             setRequests((prev) => ({
@@ -40,7 +40,7 @@ const MyCarpool = () => {
 
     const deleteCarpool = async (id) => {
         try {
-            await axios.delete(`https://rideshare-backend-eg6m.onrender.com/listing/delete/${id}`, {
+            await axios.delete(`/api/listing/delete/${id}`, {
                 withCredentials: true,
             });
             setCarpools((prevCarpools) => prevCarpools.filter((carpool) => carpool._id !== id));

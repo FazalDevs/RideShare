@@ -13,7 +13,7 @@ export default function SignupPage() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post("https://rideshare-backend-eg6m.onrender.com/user/register",
+            const response = await axios.post("/api/user/register",
                 { username, email, password },
                 { withCredentials: true, headers: { "Content-Type": "application/json" } }
             );

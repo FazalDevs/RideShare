@@ -15,7 +15,7 @@ export default function LoginPage() {
         setLoading(true); // ✅ Start loading
         try {
             const response = await axios.post(
-                'https://rideshare-backend-eg6m.onrender.com/user/login',
+                '/api/user/login',
                 { email, password },
                 { withCredentials: true, headers: { 'Content-Type': 'application/json' } }
             );

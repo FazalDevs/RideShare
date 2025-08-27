@@ -48,7 +48,7 @@ const CarpoolListings = () => {
     useEffect(() => {
         const fetchListings = async () => {
             try {
-                const response = await axios.get("https://rideshare-backend-eg6m.onrender.com/listing/fetch", {
+                const response = await axios.get("/api/listing/fetch", {
                     withCredentials: true,
                     headers: {
                         "Content-Type": "application/json",
@@ -101,7 +101,7 @@ const CarpoolListings = () => {
         async (query) => {
             if (query.length > 3) {
                 try {
-                    const response = await axios.get(`https://rideshare-backend-eg6m.onrender.com/listing/search-address`, {
+                    const response = await axios.get(`/api/listing/search-address`, {
                         params: { q: query },
                         withCredentials: true
                     });
@@ -150,7 +150,7 @@ const CarpoolListings = () => {
 
         try {
             // ✅ Fetch nearby rides within 5 km radius based on clicked suggestion
-            const response = await axios.get(`https://rideshare-backend-eg6m.onrender.com/listing/nearby`, {
+            const response = await axios.get(`/api/listing/nearby`, {
                 params: { latitude, longitude, maxDistance: 5000 },
                 withCredentials: true
             });
@@ -170,7 +170,7 @@ const CarpoolListings = () => {
     const handleSendRequest = async (carpoolId) => {
         try {
             const response = await axios.post(
-                `https://rideshare-backend-eg6m.onrender.com/request/${carpoolId}/`,
+                `/api/request/${carpoolId}/`,
                 {},
                 { withCredentials: true }
             );

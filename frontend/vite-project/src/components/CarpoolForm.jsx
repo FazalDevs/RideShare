@@ -110,7 +110,7 @@ const AddressForm = () => {
 
         try {
             const response = await axios.post(
-                "https://rideshare-backend-eg6m.onrender.com/listing/create",
+                "/api/listing/create",
                 submissionData, {
                 withCredentials: true,
                 headers: {
