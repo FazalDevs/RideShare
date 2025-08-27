@@ -9,6 +9,7 @@ export const generateToken = async (id, res) => {
         path: '/',
     });
     // console.log(token)
+    console.log("Cookie set:", res.getHeaders()['set-cookie']);
     await User.findByIdAndUpdate(id, { token });
     return token;
 }
