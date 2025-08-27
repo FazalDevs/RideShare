@@ -4,8 +4,8 @@ export const generateToken = async (id, res) => {
     const token = jwt.sign({ id }, process.env.JWT_SECRET_KEY, { expiresIn: '10h' });
     res.cookie("jwt", token, {
         httpOnly: true,
-        secure: process.env.NODE_ENV === 'production',
-        sameSite: 'none',
+        secure: true,
+        sameSite: "None",
         path: '/',
     });
     // console.log(token)
