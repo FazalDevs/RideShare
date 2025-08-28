@@ -4,6 +4,9 @@ import axios from 'axios';
 import Navbar from './Navbar';
 import toast from 'react-hot-toast';
 
+axios.defaults.withCredentials = true;
+
+
 export default function LoginPage() {
     const navigate = useNavigate();
     const [email, setEmail] = useState('');

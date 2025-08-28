@@ -6,6 +6,10 @@ import "leaflet/dist/leaflet.css";
 import NavbarLogout from "./NavbarLogout";
 import toast from 'react-hot-toast';
 
+
+axios.defaults.withCredentials = true;
+
+
 // Custom marker icons
 const defaultIcon = L.icon({
     iconUrl: "https://cdn.jsdelivr.net/gh/pointhi/leaflet-color-markers@master/img/marker-icon-2x-blue.png",

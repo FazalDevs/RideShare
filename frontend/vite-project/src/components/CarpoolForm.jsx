@@ -6,6 +6,9 @@ import "leaflet/dist/leaflet.css";
 import { useNavigate } from "react-router-dom";
 import NavbarLogout from "./NavbarLogout";
 
+axios.defaults.withCredentials = true;
+
+
 const AddressForm = () => {
     const navigate = useNavigate()
     const [query, setQuery] = useState("");
