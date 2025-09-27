@@ -1,3 +1,4 @@
+import axios from "axios"
 const axiosInstance = axios.create({
     baseURL: "https://rideshare-backend-eg6m.onrender.com",
 });
