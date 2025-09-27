@@ -1,6 +1,6 @@
 import L from "leaflet";
 import React, { useEffect, useState, useCallback } from "react";
-import axios from "axios";
+import axiosInstance from "../axios";
 import { MapContainer, TileLayer, Marker, Popup, Polyline } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import NavbarLogout from "./NavbarLogout";
@@ -48,12 +48,7 @@ const CarpoolListings = () => {
     useEffect(() => {
         const fetchListings = async () => {
             try {
-                const response = await axios.get("https://rideshare-backend-eg6m.onrender.com/listing/fetch", {
-                    withCredentials: true,
-                    headers: {
-                        "Content-Type": "application/json",
-                    }
-                });
+                const response = await axiosInstance.get("/listing/fetch");
                 setListings(response.data.listings || []);
             } catch (error) {
                 console.error("Error fetching listings:", error);
@@ -101,10 +96,10 @@ const CarpoolListings = () => {
         async (query) => {
             if (query.length > 3) {
                 try {
-                    const response = await axios.get(`https://rideshare-backend-eg6m.onrender.com/listing/search-address`, {
-                        params: { q: query },
-                        withCredentials: true
+                    const response = await axiosInstance.get("/listing/search-address", {
+                        params: { q: query }
                     });
+
 
                     if (response.data.length > 0) {
                         setSuggestions(response.data.slice(0, 5)); // Limit to 5 suggestions
@@ -150,10 +145,10 @@ const CarpoolListings = () => {
 
         try {
             // ✅ Fetch nearby rides within 5 km radius based on clicked suggestion
-            const response = await axios.get(`https://rideshare-backend-eg6m.onrender.com/listing/nearby`, {
-                params: { latitude, longitude, maxDistance: 5000 },
-                withCredentials: true
+            const response = await axiosInstance.get("/listing/nearby", {
+                params: { latitude, longitude, maxDistance: 5000 }
             });
+
 
             // ✅ Update the listings to show only rides near this location
             if (response.data.listings.length === 0) {
@@ -169,11 +164,8 @@ const CarpoolListings = () => {
 
     const handleSendRequest = async (carpoolId) => {
         try {
-            const response = await axios.post(
-                `https://rideshare-backend-eg6m.onrender.com/request/${carpoolId}/`,
-                {},
-                { withCredentials: true }
-            );
+            const response = await axiosInstance.post(`/request/${carpoolId}/`, {});
+
             toast.success('Request sent successfully');
         } catch (error) {
             console.error("Error sending request:", error);

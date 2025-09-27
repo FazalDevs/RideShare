@@ -8,30 +8,35 @@ export default function LoginPage() {
     const navigate = useNavigate();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [loading, setLoading] = useState(false); // ✅ New loading state
+    const [loading, setLoading] = useState(false);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        setLoading(true); // ✅ Start loading
+        setLoading(true);
+
         try {
             const response = await axios.post(
-                'https://rideshare-backend-eg6m.onrender.com/user/login',
+                "https://rideshare-backend-eg6m.onrender.com/user/login",
                 { email, password },
-                { withCredentials: true, headers: { 'Content-Type': 'application/json' } }
+                { headers: { "Content-Type": "application/json" } }
             );
 
-            localStorage.setItem('jwt', response.data.token);
-            toast.success('Logged in successfully 🎉');
-            setEmail('');
-            setPassword('');
-            navigate('/listing');
+            // Save JWT in localStorage
+            localStorage.setItem("jwt", response.data.token);
+
+            toast.success("Logged in successfully 🎉");
+            setEmail("");
+            setPassword("");
+
+            navigate("/listing");
         } catch (error) {
-            toast.error('Invalid credentials! Please try again.');
+            toast.error("Invalid credentials! Please try again.");
             console.error(error);
         } finally {
-            setLoading(false); // ✅ Stop loading regardless of success/failure
+            setLoading(false);
         }
     };
+
 
     return (
         <div className="bg-gradient-to-br from-blue-100 to-blue-300 min-h-screen flex flex-col">

@@ -4,18 +4,22 @@ import dotenv from 'dotenv';
 import mongoose from 'mongoose';
 import listingRoutes from './routes/listing.route.js';
 import userRoutes from './routes/user.route.js';
-import cookieParser from 'cookie-parser'
+// import cookieParser from 'cookie-parser'
 import requestRoutes from './routes/request.route.js';
 dotenv.config();
 const app = express();
-app.use(cors(
-    {
-        origin: ['https://rideshare-frontend-kixr.onrender.com', 'http://localhost:5173'],
-        credentials: true,
-    }
-));
+app.use(
+    cors({
+        origin: [
+            "https://rideshare-frontend-kixr.onrender.com",
+            "http://localhost:5173",
+        ],
+        methods: ["GET", "POST", "PUT", "DELETE"],
+        allowedHeaders: ["Content-Type", "Authorization"], // ✅ allow Authorization header
+    })
+);
 const port = process.env.PORT || 3000;
-app.use(cookieParser());
+// app.use(cookieParser());
 app.use(express.json());
 app.use('/listing', listingRoutes);
 app.use('/user', userRoutes);

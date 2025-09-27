@@ -15,10 +15,10 @@ export default function SignupPage() {
         try {
             const response = await axios.post("https://rideshare-backend-eg6m.onrender.com/user/register",
                 { username, email, password },
-                { withCredentials: true, headers: { "Content-Type": "application/json" } }
+                { headers: { "Content-Type": "application/json" } }
             );
 
-            localStorage.setItem("jwt", response.token);
+            localStorage.setItem("jwt", response.data.token);
             toast.success("Account created successfully! 🎉");
             navigate("/");
             setUsername("");
