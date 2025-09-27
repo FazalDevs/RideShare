@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import NavbarLogout from "./NavbarLogout";
-
+import axiosInstance from "../axios";
 const MyCarpool = () => {
     const [carpools, setCarpools] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -10,12 +10,13 @@ const MyCarpool = () => {
 
     const fetchCarpools = async () => {
         try {
-            const response = await axios.get("https://rideshare-backend-eg6m.onrender.com/listing/mycarpool", {
-                withCredentials: true,
-                headers: {
-                    "Content-Type": "application/json",
-                },
-            });
+            // const response = await axios.get("https://rideshare-backend-eg6m.onrender.com/listing/mycarpool", {
+            //     withCredentials: true,
+            //     headers: {
+            //         "Content-Type": "application/json",
+            //     },
+            // });
+            const response = await axiosInstance.get('/listing/mycarpool');
             setCarpools(response.data.listings);
             setLoading(false);
         } catch (err) {
@@ -26,9 +27,10 @@ const MyCarpool = () => {
 
     const fetchRequests = async (carpoolId) => {
         try {
-            const response = await axios.get(`https://rideshare-backend-eg6m.onrender.com/request/${carpoolId}`, {
-                withCredentials: true,
-            });
+            // const response = await axios.get(`https://rideshare-backend-eg6m.onrender.com/request/${carpoolId}`, {
+            //     withCredentials: true,
+            // });
+            const response = await axiosInstance.get(`/request/${carpoolId}`);
             setRequests((prev) => ({
                 ...prev,
                 [carpoolId]: response.data,
@@ -40,9 +42,10 @@ const MyCarpool = () => {
 
     const deleteCarpool = async (id) => {
         try {
-            await axios.delete(`https://rideshare-backend-eg6m.onrender.com/listing/delete/${id}`, {
-                withCredentials: true,
-            });
+            // await axios.delete(`https://rideshare-backend-eg6m.onrender.com/listing/delete/${id}`, {
+            //     withCredentials: true,
+            // });
+            await axiosInstance.delete(`listing/delete/${id}`);
             setCarpools((prevCarpools) => prevCarpools.filter((carpool) => carpool._id !== id));
         } catch (err) {
             setError("Failed to delete the carpool. Please try again later.");

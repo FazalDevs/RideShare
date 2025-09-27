@@ -109,15 +109,8 @@ const AddressForm = () => {
         };
 
         try {
-            const response = await axios.post(
-                "https://rideshare-backend-eg6m.onrender.com/listing/create",
-                submissionData, {
-                withCredentials: true,
-                headers: {
-                    "Content-Type": "application/json",
-                }
-            }
-            );
+            const response = await axiosInstance.post("/listing/create", submissionData);
+
             alert("Carpool created successfully!");
             // console.log(response.data);
             navigate('/listing')

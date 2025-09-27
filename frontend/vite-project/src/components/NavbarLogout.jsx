@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
+import axiosInstance from '../axios';
 
 export default function NavbarLogout() {
     const navigate = useNavigate();
@@ -9,12 +10,8 @@ export default function NavbarLogout() {
 
     const handleLogout = async () => {
         // Add your logout logic here (e.g., clearing tokens, redirecting, etc.)
-        const response = await axios.get('https://rideshare-backend-eg6m.onrender.com/user/logout', {
-            withCredentials: true,
-            headers: {
-                'Content-Type': 'application/json',
-            },
-        });
+        const response = await axiosInstance.get('/user/logout');
+
         localStorage.removeItem('jwt');
         toast.success('Logged out successfully');
         navigate('/');
